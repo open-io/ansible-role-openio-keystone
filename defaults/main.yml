@@ -12,6 +12,13 @@ openio_keystone_repo_managed: false
 openio_keystone_openstack_distribution: queens
 openio_keystone_nodes_group: keystone
 openio_keystone_db_nodes_group: galera
+openio_keystone_memcached_nodes_group: "{%- if 'memcached_keystone' in groups -%}
+  memcached_keystone
+  {%- elif 'memcached' in groups -%}
+  memcached
+  {%- else -%}
+  {{ openio_keystone_nodes_group }}
+  {%- endif -%}"
 
 openio_keystone_database_engine: mysql
 openio_keystone_database_sqlite_directory: /var/lib/keystone
@@ -40,8 +47,8 @@ openio_keystone_config_default_debug: false
 openio_keystone_config_cache_backend: dogpile.cache.memcached
 openio_keystone_config_cache_enabled: true
 openio_keystone_config_cache_debug_cache_backend: ""
-openio_keystone_config_cache_memcache_servers: "{% if openio_keystone_nodes_group in groups -%}
-  {{ groups[openio_keystone_nodes_group]
+openio_keystone_config_cache_memcache_servers: "{% if openio_keystone_memcached_nodes_group in groups -%}
+  {{ groups[openio_keystone_memcached_nodes_group]
     | map('extract', hostvars, ['openio_bind_address'])
     | map('regex_replace', '$', ':6019') | list | unique | join(',') }}
   {%- else -%}
