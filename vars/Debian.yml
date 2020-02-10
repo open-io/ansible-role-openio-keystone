@@ -7,7 +7,7 @@ keystone_packages:
   - uwsgi-plugin-python
   - python-shade
   - python-cffi
-  - python-pip
+  - python3-pip
   - rsync
   - python-openstackclient
 
