@@ -1,4 +1,3 @@
-# roles/keystone/defaults/main.yml
 ---
 openio_keystone_namespace: "{{ namespace | default('OPENIO') }}"
 openio_keystone_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
@@ -136,4 +135,10 @@ openio_keystone_projects:
         role: _member_
 
 openio_keystone_no_log: "{{ openio_no_log | d(true) }}"
+openio_keystone_sysconfig_dir: "/etc/oio/sds/{{ openio_keystone_namespace }}"
+openio_keystone_servicename: "keystone-{{ openio_keystone_serviceid }}"
+
+openio_keystone_definition_file: >
+  "{{ openio_keystone_sysconfig_dir }}/
+  {{ openio_keystone_servicename }}/{{ openio_keystone_servicename }}.conf"
 ...
