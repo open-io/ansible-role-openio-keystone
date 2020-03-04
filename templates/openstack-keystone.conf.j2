@@ -1,7 +1,7 @@
 #{{ ansible_managed }}
 {{ openio_keystone_config_default_log_dir }}/*.log {
-    rotate 14
-    size 10M
+    rotate {{ openio_log_retention | default(14) | int }}
+    size {{ openio_log_max_size | default('50M') }}
     missingok
     compress
 }
