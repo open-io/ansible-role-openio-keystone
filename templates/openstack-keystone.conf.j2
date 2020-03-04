@@ -4,4 +4,9 @@
     size {{ openio_log_max_size | default('50M') }}
     missingok
     compress
+    delaycompress
+    copytruncate
+    nodateext
+    notifempty
+    sharedscripts
 }
