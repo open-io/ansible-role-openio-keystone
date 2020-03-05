@@ -20,9 +20,17 @@
 - name: 'Install configuration logrotate files'
   template:
     src: openstack-keystone.conf.j2
-    dest: "/etc/logrotate.d/openstack-keystone"
+    dest: "{{ openio_keystone_logrotate_file }}"
     owner: root
     group: root
     mode: '0644'
+  tags: configure
+
+# this task corrects past errors for Bionic
+- name: remove legacy wrong file
+  file:
+    path: /etc/logrotate.d/openstack-keystone
+    state: absent
+  when: ansible_os_family == 'Debian'
   tags: configure
 ...
