@@ -10,4 +10,5 @@ keystone_packages:
   - python-openstackclient
 
 openio_keystone_uwsgi_bin: /sbin/uwsgi
+openio_keystone_logrotate_file: /etc/logrotate.d/openstack-keystone
 ...

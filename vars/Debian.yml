@@ -11,6 +11,6 @@ keystone_packages:
   - rsync
   - python-openstackclient
 
-#openio_keystone_uwsgi_config_dir: /etc/uwsgi
 openio_keystone_uwsgi_bin: /usr/bin/uwsgi
+openio_keystone_logrotate_file: /etc/logrotate.d/keystone
 ...
