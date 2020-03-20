@@ -1,7 +1,7 @@
 ---
 openio_keystone_namespace: "{{ namespace | default('OPENIO') }}"
 openio_keystone_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
-openio_keystone_provision_only: false
+openio_keystone_provision_only: "{{ openio_maintenance_mode | d(false) | bool }}"
 
 openio_keystone_bind_interface: "{{ ansible_default_ipv4.alias }}"
 openio_keystone_bind_address: "{{ openio_bind_address \
@@ -69,8 +69,8 @@ openio_keystone_fernet_tokens_key_repository: /etc/keystone/fernet-keys
 # Credentials
 openio_keystone_credentials_tokens_key_repository: /etc/keystone/credential-keys
 
-openio_keystone_gridinit_dir: "/etc/gridinit.d/{{ openio_keystone_namespace }}"
-openio_keystone_gridinit_file_prefix: ""
+openio_keystone_gridinit_dir: "{{ openio_gridinit_d | d('/etc/gridinit.d/') }}"
+openio_keystone_gridinit_file_prefix: "{{ openio_keystone_namespace }}-"
 
 openio_keystone_wsgi_program_names:
   - "{{ openio_keystone_wsgi_public_program_name }}"
