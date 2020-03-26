@@ -97,9 +97,15 @@ openio_keystone_services_to_bootstrap:
     project: admin
     role: admin
     regionid: "{{ openio_s3_region | d('us-east-1') }}"
-    adminurl: "http://{{ openio_bind_virtual_address | d(openio_keystone_bind_address) }}:35357"
-    publicurl: "http://{{ openio_bind_virtual_address | d(openio_keystone_bind_address) }}:5000"
-    internalurl: "http://{{ openio_bind_virtual_address | d(openio_keystone_bind_address) }}:5000"
+    adminurl: "http://{{ openio_bind_virtual_address_fqdn \
+                 | default(openio_bind_virtual_address) \
+                 | default(openio_keystone_bind_address) }}:35357"
+    publicurl: "http://{{ openio_bind_virtual_address_fqdn \
+                 | default(openio_bind_virtual_address) \
+                 | default(openio_keystone_bind_address) }}:5000"
+    internalurl: "http://{{ openio_bind_virtual_address_fqdn \
+                 | default(openio_bind_virtual_address) \
+                 | default(openio_keystone_bind_address) }}:5000"
 
 openio_keystone_cloudname: "{{ openio_keystone_namespace | lower }}"
 openio_keystone_users:
@@ -114,12 +120,17 @@ openio_keystone_services:
     description: OpenIO SDS swift proxy
     endpoint:
       - interface: admin
-        url: "http://{{ openio_bind_virtual_address | d(openio_keystone_bind_address) }}:6007"
+        url: "http://{{ openio_bind_virtual_address_fqdn \
+                | default(openio_bind_virtual_address) \
+                | default(openio_keystone_bind_address) }}:6007"
       - interface: internal
-        url: "http://{{ openio_bind_virtual_address | d(openio_keystone_bind_address) }}:6007/v1/AUTH_%(tenant_id)s"
+        url: "http://{{ openio_bind_virtual_address_fqdn \
+                | default(openio_bind_virtual_address) \
+                | default(openio_keystone_bind_address) }}:6007/v1/AUTH_%(tenant_id)s"
       - interface: public
-        url: "http://{{ openio_bind_virtual_address | d(openio_keystone_bind_address) }}:6007/v1/AUTH_%(tenant_id)s"
-
+        url: "http://{{ openio_bind_virtual_address_fqdn \
+                | default(openio_bind_virtual_address) \
+                | default(openio_keystone_bind_address) }}:6007/v1/AUTH_%(tenant_id)s"
 
 openio_keystone_projects:
   - name: service
