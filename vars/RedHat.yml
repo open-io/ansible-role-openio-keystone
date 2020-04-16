@@ -5,6 +5,7 @@ keystone_packages:
   - openstack-keystone
   - uwsgi
   - uwsgi-plugin-python2
+  - uwsgi-logger-file
   - python2-shade
   - rsync
   - python-openstackclient
