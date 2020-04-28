@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-keystone.svg?branch=master)](https://travis-ci.org/open-io/ansible-role-openio-keystone)
+[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-keystone.svg?branch=20.04)](https://travis-ci.org/open-io/ansible-role-openio-keystone)
 # Ansible role `keystone`
 
 An Ansible role for keystone. Specifically, the responsibilities of this role are to:
