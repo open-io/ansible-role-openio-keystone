@@ -3,7 +3,7 @@ openio_keystone_namespace: "{{ namespace | default('OPENIO') }}"
 openio_keystone_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
 openio_keystone_provision_only: "{{ openio_maintenance_mode | d(false) | bool }}"
 
-openio_keystone_bind_interface: "{{ ansible_default_ipv4.alias }}"
+openio_keystone_bind_interface: "{{ openio_bind_interface | d(ansible_default_ipv4.alias) }}"
 openio_keystone_bind_address: "{{ openio_bind_address \
   | default(hostvars[inventory_hostname]['ansible_' + openio_keystone_bind_interface]['ipv4']['address']) }}"
 
